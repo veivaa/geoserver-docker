@@ -9,6 +9,7 @@ This Dockerfile can be used to create images for all geoserver versions since 2.
   * Support of custom fonts (e.g. for SLD styling)
   * CORS support
   * Support extensions
+  * Support community extensions
   * Support additional libraries
 
 ## How to Use

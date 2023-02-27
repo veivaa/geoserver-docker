@@ -1,9 +1,10 @@
 FROM ubuntu:22.04
+LABEL org.opencontainers.image.authors="veikko.vaataja@gmail.com"
 
 # The GS_VERSION argument could be used like this to overwrite the default:
 # docker build --build-arg GS_VERSION=2.21.2 -t geoserver:2.21.2 .
 ARG TOMCAT_VERSION=9.0.68
-ARG GS_VERSION=2.22.0
+ARG GS_VERSION=2.22.2
 ARG GS_DATA_PATH=./geoserver_data/
 ARG ADDITIONAL_LIBS_PATH=./additional_libs/
 ARG ADDITIONAL_FONTS_PATH=./additional_fonts/
@@ -12,6 +13,8 @@ ARG CORS_ALLOWED_ORIGINS=*
 ARG CORS_ALLOWED_METHODS=GET,POST,PUT,DELETE,HEAD,OPTIONS
 ARG CORS_ALLOWED_HEADERS=*
 ARG STABLE_PLUGIN_URL=https://downloads.sourceforge.net/project/geoserver/GeoServer/${GS_VERSION}/extensions
+# Todo: Fix fixed version 2.22.x
+ARG COMMUNITY_PLUGIN_URL=https://build.geoserver.org/geoserver/2.22.x/community-latest
 
 # Environment variables
 ENV CATALINA_HOME=/opt/apache-tomcat-${TOMCAT_VERSION}
@@ -32,6 +35,11 @@ ENV ADDITIONAL_LIBS_DIR=/opt/additional_libs/
 ENV ADDITIONAL_FONTS_DIR=/opt/additional_fonts/
 ENV SKIP_DEMO_DATA=false
 ENV ROOT_WEBAPP_REDIRECT=false
+# Install community extensions. E.g. ogcapi.
+ENV COMMUNITY_INSTALL_EXTENSIONS=false
+ENV COMMUNITY_EXTENSIONS=''
+ENV COMMUNITY_PLUGIN_URL=$COMMUNITY_PLUGIN_URL
+ENV COMMUNITY_EXTENSION_VERSION='2.22'
 
 # see https://docs.geoserver.org/stable/en/user/production/container.html
 ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
