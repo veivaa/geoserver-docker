@@ -31,6 +31,9 @@ fi
 ## install GeoServer extensions before starting the tomcat
 /opt/install-extensions.sh
 
+## install GeoServer community extensions before starting the tomcat
+/opt/install-community-extensions.sh
+
 # copy additional geoserver libs before starting the tomcat
 # we also count whether at least one file with the extensions exists
 count=`ls -1 $ADDITIONAL_LIBS_DIR/*.jar 2>/dev/null | wc -l`

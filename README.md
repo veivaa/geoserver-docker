@@ -9,6 +9,7 @@ This Dockerfile can be used to create images for all geoserver versions since 2.
   * Support of custom fonts (e.g. for SLD styling)
   * CORS support
   * Support extensions
+  * Support community extensions
   * Support additional libraries
 
 ## How to Use
@@ -100,6 +101,22 @@ db2          imagemap        netcdf-out    sqlserver        xslt
 dxf          importer        netcdf        vectortiles      ysld
 excel        inspire         ogr-wfs       wcs2_0-eo
 ```
+
+### How to download and install additional community extensions on startup?
+
+The ``startup.sh`` script allows some customization on startup:
+
+* ``COMMUNITY_INSTALL_EXTENSIONS`` to ``true`` to download and install extensions
+* ``COMMUNITY_EXTENSIONS`` list of extensions to download and install
+
+Example installing ogcapi extension:
+
+```shell
+docker run -it -p 80:8080 \
+  --env COMMUNITY_INSTALL_EXTENSIONS=true --env COMMUNITY_EXTENSIONS="ogcapi" \
+  veivaa/geoserver:2.22.2
+```
+
 
 ### How to install additional extensions from local folder?
 
